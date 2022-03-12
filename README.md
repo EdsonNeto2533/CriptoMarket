@@ -17,7 +17,7 @@
 
 ### Branching
 
-(https://user-images.githubusercontent.com/79104686/158034889-86902ca9-de90-4199-bc97-0659a4759066.png)
+![alt text](https://user-images.githubusercontent.com/79104686/158034889-86902ca9-de90-4199-bc97-0659a4759066.png)
 
 
 ### Design
