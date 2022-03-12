@@ -3,7 +3,7 @@
 
 
 ## Project Description
-<p align="center">An application to show the cripto coin market and its values/p>
+<p align="center">An application to show the cripto coin market and its values</p>
 
 
 <h4 align="center"> 
