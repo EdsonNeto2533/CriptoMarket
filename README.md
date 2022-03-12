@@ -19,6 +19,15 @@
 
 ![alt text](https://user-images.githubusercontent.com/79104686/158034889-86902ca9-de90-4199-bc97-0659a4759066.png)
 
+branching names pattern:
+- bugfix - bugfix/CAN-0000-some_description
+- feature - feature/CAN-0000-some_description
+- refactor - refactor/CAN-0000-some_description
+
+commit message pattern:
+- bugfix - bugfix(CAN-0000): commit message
+- feature - feat(CAN-0000): commit message
+- refactor - refactor(CAN-0000): commit message
 
 ### Design
 
