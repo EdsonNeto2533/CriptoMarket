@@ -1,11 +1,3 @@
-
-
-https://www.figma.com/file/uWe8yjysaIOMgdM58oW0FQ/Crypto-Trading-Application-UI-Kit-(Community)?node-id=146%3A10
-
-https://developers.coinranking.com/api/documentation/coins
-
-
-
 <h1 align="center">CriptoMarket</h1>
 
 
@@ -21,9 +13,16 @@ https://developers.coinranking.com/api/documentation/coins
 
 ### Functionalities
 
-- [] Show current value of cripto coins
+- [ ] Show current value of cripto coins
 
 
+### Design
+
+[Figma](https://www.figma.com/file/uWe8yjysaIOMgdM58oW0FQ/Crypto-Trading-Application-UI-Kit-(Community)?node-id=146%3A10)
+
+### BackEnd
+
+[CoinRanking](https://developers.coinranking.com/api/documentation/coins)
 
 ### Requirements 
 
