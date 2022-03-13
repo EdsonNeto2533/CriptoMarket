@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
  * @param R is the return type
  */
 interface IUseCase <P , R> {
-    suspend fun execute(param: P): Flow<R>?
+    suspend fun execute(param: P?): Flow<R>?
 }

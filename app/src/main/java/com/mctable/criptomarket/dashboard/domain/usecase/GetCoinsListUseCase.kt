@@ -11,7 +11,7 @@ class GetCoinsListUseCase(
     private val coinDashboardRepository: ICoinDashboardRepository
 ) : IUseCase<Void, List<CoinModel>> {
 
-    override suspend fun execute(param: Void): Flow<List<CoinModel>> {
+    override suspend fun execute(param: Void?): Flow<List<CoinModel>> {
         val mapper = CoinResponseToModel()
         return coinDashboardRepository.getCoinsList().map { response ->
             response.data.let { mapper.transform(it) }
