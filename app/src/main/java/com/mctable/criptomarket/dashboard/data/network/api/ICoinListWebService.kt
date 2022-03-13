@@ -11,5 +11,6 @@ import retrofit2.http.Header
 interface ICoinListWebService {
 
     @GET("/coins")
-    suspend fun getCoinsList(@Header(Headers.TOKEN) apiKey: String = CriptoMarketConstraints.API_KEY): Response<DataResponse<CoinsResponse>>
+    suspend fun getCoinsList(@Header(Headers.TOKEN) apiKey: String = CriptoMarketConstraints.API_KEY):
+            Response<DataResponse<CoinsResponse>>
 }
