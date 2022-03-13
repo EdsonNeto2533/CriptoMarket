@@ -5,6 +5,6 @@ object CriptoMarketConstraints {
     const val API_KEY = "coinranking9be2a2d2edd1ceeca7c7385410decd9d8983b9911d8ab470"
 }
 
-object HEADERS {
+object Headers {
     const val TOKEN = "x-access-token"
 }
