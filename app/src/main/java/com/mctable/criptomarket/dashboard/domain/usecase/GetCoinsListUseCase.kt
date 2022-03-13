@@ -5,7 +5,7 @@ import com.mctable.criptomarket.dashboard.data.mapper.CoinResponseToModel
 import com.mctable.criptomarket.dashboard.domain.model.CoinModel
 import com.mctable.criptomarket.dashboard.domain.repository.ICoinDashboardRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.flow
 
 class GetCoinsListUseCase(
     private val coinDashboardRepository: ICoinDashboardRepository
@@ -13,10 +13,9 @@ class GetCoinsListUseCase(
 
     override suspend fun execute(param: Void?): Flow<List<CoinModel>> {
         val mapper = CoinResponseToModel()
-        return coinDashboardRepository.getCoinsList().map { response ->
-            response.data.let { mapper.transform(it) }
+        return flow {
+           val list = mapper.transform(coinDashboardRepository.getCoinsList().data)
+            emit(list)
         }
     }
-
-
 }

@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ICoinDashboardRepository {
 
-    suspend fun getCoinsList(): Flow<DataResponse<CoinsResponse>>
+    suspend fun getCoinsList(): DataResponse<CoinsResponse>
 }

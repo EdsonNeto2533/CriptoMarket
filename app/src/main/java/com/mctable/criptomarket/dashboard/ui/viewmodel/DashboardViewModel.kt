@@ -1,5 +1,7 @@
 package com.mctable.criptomarket.dashboard.ui.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mctable.criptomarket.commons.utils.implementations.UIState
@@ -12,17 +14,17 @@ class DashboardViewModel(
     private val getCoinsListUseCase: GetCoinsListUseCase
 ) : ViewModel() {
 
-    private val _coinsListUIState = MutableSharedFlow<UIState<List<CoinModel>>>()
-    val coinsListUIState = _coinsListUIState.asSharedFlow()
+    private val _coinsListUIState = MutableLiveData<UIState<List<CoinModel>>>()
+    val coinsListUIState: LiveData<UIState<List<CoinModel>>> = _coinsListUIState
 
     fun getCoinsList() {
         viewModelScope.launch {
             getCoinsListUseCase.execute(null).onStart {
-                _coinsListUIState.emit(UIState.Loading)
+                _coinsListUIState.postValue(UIState.Loading)
             }.catch {
-                _coinsListUIState.emit(UIState.Failure)
+                _coinsListUIState.postValue(UIState.Failure)
             }.collect {
-                UIState.Success(it)
+                _coinsListUIState.postValue(UIState.Success(it))
             }
         }
     }
