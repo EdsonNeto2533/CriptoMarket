@@ -8,8 +8,8 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 
 interface ICoinListWebService {
-
+    //@Header(Headers.TOKEN) apiKey: String = CriptoMarketConstraints.API_KEY
     @GET("coins")
-    suspend fun getCoinsList(@Header(Headers.TOKEN) apiKey: String = CriptoMarketConstraints.API_KEY):
+    suspend fun getCoinsList():
             DataResponse<CoinsResponse>
 }

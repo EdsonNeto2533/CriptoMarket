@@ -6,5 +6,5 @@ import com.mctable.criptomarket.dashboard.data.network.webservice.CoinListWebSer
 import org.koin.dsl.module
 
 val webService = module {
-    single<ICoinListWebService> { CoinListWebService(CriptoMarketConstraints.BASE_URL) }
+    single<ICoinListWebService> { CoinListWebService(CriptoMarketConstraints.BASE_URL, get()) }
 }
