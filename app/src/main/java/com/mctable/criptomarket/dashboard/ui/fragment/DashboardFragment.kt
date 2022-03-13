@@ -10,8 +10,10 @@ import com.mctable.criptomarket.R
 import com.mctable.criptomarket.commons.utils.implementations.UIState
 import com.mctable.criptomarket.dashboard.ui.viewmodel.DashboardViewModel
 import com.mctable.criptomarket.databinding.FragmentDashboardBinding
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.onStart
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
@@ -26,18 +28,13 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
     }
 
     private fun loadObservers() {
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.coinsListUIState.collect { state ->
-
-//            }
-//        }
-        viewModel.coinsListUIState.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is UIState.Loading -> print("carregando")
-                is UIState.Failure -> print("falhou")
-                is UIState.Success -> {
-                    print(state.data)
-                }
+        lifecycleScope.launchWhenStarted {
+            viewModel.coinsListUIState.onStart {
+                print("carregando")
+            }.catch {
+                print("falhou")
+            }.collect {
+                print(it)
             }
         }
     }
