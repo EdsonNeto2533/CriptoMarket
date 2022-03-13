@@ -1,4 +1,4 @@
-package com.mctable.criptomarket.commons.utils.response
+package com.mctable.criptomarket.commons.utils.implementations
 
 import com.google.gson.annotations.SerializedName
 
