@@ -2,9 +2,9 @@ package com.mctable.criptomarket.dashboard.domain.repository
 
 import com.mctable.criptomarket.commons.utils.implementations.DataResponse
 import com.mctable.criptomarket.dashboard.data.network.response.CoinsResponse
-import retrofit2.Response
+import kotlinx.coroutines.flow.Flow
 
 interface ICoinDashboardRepository {
 
-    suspend fun getCoinsList(): Response<DataResponse<CoinsResponse>>
+    suspend fun getCoinsList(): Flow<DataResponse<CoinsResponse>>
 }

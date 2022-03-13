@@ -4,7 +4,7 @@ import com.mctable.criptomarket.commons.utils.constraints.CriptoMarketConstraint
 import com.mctable.criptomarket.commons.utils.constraints.Headers
 import com.mctable.criptomarket.commons.utils.implementations.DataResponse
 import com.mctable.criptomarket.dashboard.data.network.response.CoinsResponse
-import retrofit2.Response
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.Header
 
@@ -12,5 +12,5 @@ interface ICoinListWebService {
 
     @GET("/coins")
     suspend fun getCoinsList(@Header(Headers.TOKEN) apiKey: String = CriptoMarketConstraints.API_KEY):
-            Response<DataResponse<CoinsResponse>>
+            Flow<DataResponse<CoinsResponse>>
 }
