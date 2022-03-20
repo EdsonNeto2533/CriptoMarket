@@ -17,7 +17,8 @@ class CriptoMarketApp : Application() {
                 repositoryModule,
                 useCaseModule,
                 viewModelModule,
-                interceptorsModule
+                interceptorsModule,
+                dialogModule
             )
         }
     }
