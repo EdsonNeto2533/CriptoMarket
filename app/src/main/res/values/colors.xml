@@ -10,4 +10,7 @@
 
     <color name="primary_blue">#005BE3</color>
     <color name="primary_gray_background">#6C757D</color>
+
+    <color name="green_profit">#21BF73</color>
+    <color name="red_profit">#D90429</color>
 </resources>
