@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.mctable.criptomarket.R
 import com.mctable.criptomarket.commons.ui.dialogs.LoadingDialog
+import com.mctable.criptomarket.dashboard.ui.adapter.CoinListAdapter
 import com.mctable.criptomarket.dashboard.ui.viewmodel.DashboardViewModel
 import com.mctable.criptomarket.databinding.FragmentDashboardBinding
 import kotlinx.coroutines.flow.catch
@@ -19,11 +20,18 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
     private val viewModel: DashboardViewModel by viewModel()
     private lateinit var binding: FragmentDashboardBinding
     private val loadingDialog: LoadingDialog by inject { parametersOf(requireActivity()) }
+    private val coinsAdapter = CoinListAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentDashboardBinding.bind(view)
         loadObservers()
+        setupCoinsRecyclerView()
         viewModel.getCoinsList()
+    }
+
+    private fun setupCoinsRecyclerView(){
+        binding.rvCoins.adapter = coinsAdapter
     }
 
     private fun loadObservers() {
@@ -34,7 +42,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                 print("falhou")
             }.collect {
                 loadingDialog.dismiss()
-                print(it)
+                coinsAdapter.submitList(it)
             }
         }
     }

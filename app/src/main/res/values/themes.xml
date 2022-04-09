@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.CriptoMarket" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.CriptoMarket" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -19,4 +19,20 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="text_bold_16">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="text_normal_8">
+        <item name="android:textSize">8sp</item>
+    </style>
+
+    <style name="text_normal_10">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+
 </resources>
