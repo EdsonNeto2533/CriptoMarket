@@ -3,10 +3,11 @@ package com.mctable.criptomarket.dashboard.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.github.mikephil.charting.components.Description
+import com.bumptech.glide.Glide
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -16,11 +17,17 @@ import com.mctable.criptomarket.R
 import com.mctable.criptomarket.commons.utils.extensions.formatPriceVariation
 import com.mctable.criptomarket.dashboard.domain.model.CoinModel
 import com.mctable.criptomarket.databinding.ItemCardDashboardCoinBinding
+
 import java.text.NumberFormat
 import java.util.*
 
 class CoinListAdapter :
     ListAdapter<CoinModel, CoinListAdapter.CoinListViewHolder>(CoinListDiffUtils()) {
+
+    companion object {
+        private const val PNG = "png"
+        private const val SVG = "svg"
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinListViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -38,24 +45,33 @@ class CoinListAdapter :
         private val binding = ItemCardDashboardCoinBinding.bind(itemView)
 
         fun bind(coinModel: CoinModel) {
-            loadSvgCoinImg(coinModel.icon)
+            setImg(coinModel.icon)
             binding.ivCoinSymbol
             binding.tvCoinLetters.text = coinModel.symbol
             binding.tvCoinName.text = coinModel.name
-            setupLineChart(coinModel.variation)
+            setupLineChart(coinModel.variation, getVariationColor(coinModel.priceVariation))
             formatToCurrency(coinModel.price)
-            setPriceVariation(coinModel.priceVariation)
+            setPriceVariation(coinModel.priceVariation, getVariationColor(coinModel.priceVariation))
         }
 
-        private fun setupLineChart(values: List<String>) {
+        private fun setImg(url: String) {
+            when (url.substring(url.length - 3)) {
+                PNG -> {
+                    loadPngCoinImg(url)
+                }
+                SVG -> loadSvgCoinImg(url)
+            }
+        }
+
+        private fun setupLineChart(values: List<String>, @ColorRes lineColor: Int) {
             val entrys = values.mapIndexed { index, value ->
                 Entry(index.toFloat(), value.toFloat())
             }
-            val lineDataset = LineDataSet(entrys.subList(0 , 7), "")
+            val lineDataset = LineDataSet(entrys, "")
             lineDataset.setDrawValues(false)
             lineDataset.setDrawCircles(false)
             lineDataset.setDrawCircleHole(true)
-            lineDataset.color = R.color.black
+            lineDataset.color = itemView.resources.getColor(lineColor, null)
 
             val dataSetList = mutableListOf<ILineDataSet>()
             dataSetList.add(lineDataset)
@@ -94,17 +110,26 @@ class CoinListAdapter :
             requestBuilder.load(url).into(binding.ivCoinSymbol)
         }
 
-        private fun setPriceVariation(priceVariation: String) {
-            val priceVariationFormated = priceVariation.formatPriceVariation()
-            if (priceVariationFormated.startsWith("-")) {
-                binding.tvCoinProfit.setTextColor(
-                    itemView.resources.getColor(
-                        R.color.red_profit,
-                        null
-                    )
+        private fun loadPngCoinImg(url: String) {
+            Glide.with(itemView.context).load(url).into(binding.ivCoinSymbol)
+        }
+
+        private fun setPriceVariation(priceVariation: String, @ColorRes color: Int) {
+            binding.tvCoinProfit.setTextColor(
+                itemView.resources.getColor(
+                    color,
+                    null
                 )
-            }
-            binding.tvCoinProfit.text = priceVariationFormated
+            )
+            binding.tvCoinProfit.text = priceVariation.formatPriceVariation()
+        }
+
+        private fun getVariationColor(priceVariation: String): Int {
+            val priceVariationFormated = priceVariation.formatPriceVariation()
+            return if (priceVariationFormated.startsWith("-"))
+                R.color.red_profit
+            else
+                R.color.green_profit
         }
     }
 
