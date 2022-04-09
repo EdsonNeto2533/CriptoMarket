@@ -1,5 +1,6 @@
 package com.mctable.criptomarket.dashboard.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,9 +8,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.mctable.criptomarket.R
+import com.mctable.criptomarket.commons.utils.extensions.formatPriceVariation
+import com.mctable.criptomarket.commons.utils.extensions.formatToCurrencyValue
 import com.mctable.criptomarket.dashboard.domain.model.CoinModel
 import com.mctable.criptomarket.databinding.ItemCardDashboardCoinBinding
+import java.text.NumberFormat
+import java.util.*
 
 class CoinListAdapter :
     ListAdapter<CoinModel, CoinListAdapter.CoinListViewHolder>(CoinListDiffUtils()) {
@@ -30,12 +36,34 @@ class CoinListAdapter :
         private val binding = ItemCardDashboardCoinBinding.bind(itemView)
 
         fun bind(coinModel: CoinModel) {
-            Glide.with(binding.root).load(coinModel.icon).into(binding.ivCoinSymbol)
+            loadSvgCoinImg(coinModel.icon)
             binding.ivCoinSymbol
             binding.tvCoinLetters.text = coinModel.symbol
             binding.tvCoinName.text = coinModel.name
-            binding.tvCoinProfit.text = coinModel.priceVariation
-            binding.tvCoinValue.text = coinModel.price
+            formatToCurrency(coinModel.price)
+            setPriceVariation(coinModel.priceVariation)
+        }
+
+        private fun formatToCurrency(value: String) {
+            val numberFormat = NumberFormat.getCurrencyInstance(Locale.US)
+            binding.tvCoinValue.text = numberFormat.format(value.toDouble())
+        }
+
+        private fun loadSvgCoinImg(url: String) {
+            val requestBuilder = GlideToVectorYou.init().with(itemView.context).requestBuilder
+            requestBuilder.load(url).into(binding.ivCoinSymbol)
+        }
+
+        private fun setPriceVariation(priceVariation: String) {
+            if (priceVariation.startsWith("-")) {
+                binding.tvCoinProfit.setTextColor(
+                    itemView.resources.getColor(
+                        R.color.red_profit,
+                        null
+                    )
+                )
+            }
+            binding.tvCoinProfit.text = priceVariation.formatPriceVariation()
         }
     }
 

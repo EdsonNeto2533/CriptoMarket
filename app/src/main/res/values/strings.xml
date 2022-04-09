@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CriptoMarket</string>
+    <string name="coin_price_variation">%1$s %</string>
 </resources>
