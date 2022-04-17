@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">CriptoMarket</string>
     <string name="coin_price_variation">%1$s %</string>
+
+    <!--region Bottom Menu -->
+    <string name="main_bottom_menu_home">Home</string>
+    <string name="main_bottom_menu_exchanges">Exchanges</string>
+    <string name="main_bottom_menu_market">Market</string>
+    <!-- endregion -->
 </resources>
