@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_menu_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/main_bottom_menu_home" />
+
+    <item
+        android:id="@+id/bottom_menu_market"
+        android:icon="@drawable/ic_market"
+        android:title="@string/main_bottom_menu_market" />
+
+    <item
+        android:id="@+id/bottom_menu_exchanges"
+        android:icon="@drawable/ic_exchanges"
+        android:title="@string/main_bottom_menu_exchanges" />
+</menu>
