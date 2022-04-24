@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_dialog_default_message">Sorry for the problem, please try again</string>
+    <string name="error_dialog_try_again_message">Try again</string>
+</resources>

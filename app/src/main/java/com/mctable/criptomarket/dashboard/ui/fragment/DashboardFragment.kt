@@ -5,6 +5,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.mctable.criptomarket.R
+import com.mctable.criptomarket.commons.ui.dialogs.ErrorDialog
+import com.mctable.criptomarket.commons.ui.dialogs.ErrorDialogInfoModel
 import com.mctable.criptomarket.commons.ui.dialogs.LoadingDialog
 import com.mctable.criptomarket.dashboard.ui.adapter.CoinListAdapter
 import com.mctable.criptomarket.dashboard.ui.viewmodel.DashboardViewModel
@@ -20,6 +22,13 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
     private val viewModel: DashboardViewModel by viewModel()
     private lateinit var binding: FragmentDashboardBinding
     private val loadingDialog: LoadingDialog by inject { parametersOf(requireActivity()) }
+    private val defaultErrorDialog: ErrorDialog by inject {
+        parametersOf(
+            requireActivity(),
+            ErrorDialogInfoModel(null) { viewModel.getCoinsList() }
+        )
+    }
+
     private val coinsAdapter = CoinListAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,7 +39,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         viewModel.getCoinsList()
     }
 
-    private fun setupCoinsRecyclerView(){
+    private fun setupCoinsRecyclerView() {
         binding.rvCoins.adapter = coinsAdapter
     }
 
@@ -39,7 +48,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             viewModel.coinsListUIState.onStart {
                 loadingDialog.show()
             }.catch {
-                print("falhou")
+                defaultErrorDialog.show()
             }.collect {
                 loadingDialog.dismiss()
                 coinsAdapter.submitList(it)
