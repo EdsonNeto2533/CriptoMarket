@@ -1,13 +1,10 @@
 package com.mctable.criptomarket.commons.ui.dialogs
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentManager
 import com.mctable.criptomarket.R
 import com.mctable.criptomarket.databinding.FragmentLoadingDialogBinding
 
@@ -26,6 +23,7 @@ class LoadingDialog(private val activity: AppCompatActivity) :
 
         val dialog = AlertDialog.Builder(activity)
         dialog.setView(view)
+        dialog.setCancelable(false)
 
         return dialog.create()
     }

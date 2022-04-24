@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Edson/AndroidStudioProjects/CriptoMarket/app/src/main/res/layout/fragment_dashboard.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Edson/AndroidStudioProjects/CriptoMarket/app/src/main/res/layout/fragment_error_dialog.xml" value="0.5" />
         <entry key="..\:/Users/Edson/AndroidStudioProjects/CriptoMarket/app/src/main/res/layout/fragment_loading_dialog.xml" value="0.25" />
         <entry key="..\:/Users/Edson/AndroidStudioProjects/CriptoMarket/app/src/main/res/layout/item_card_dashboard_coin.xml" value="0.5" />
         <entry key="..\:/Users/Edson/AndroidStudioProjects/CriptoMarket/app/src/main/res/layout/main_activity.xml" value="0.17074275362318841" />
