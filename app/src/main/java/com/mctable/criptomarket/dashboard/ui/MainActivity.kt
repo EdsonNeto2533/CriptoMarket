@@ -10,6 +10,10 @@ import com.mctable.criptomarket.databinding.MainActivityBinding
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        private const val MINIMAL_FRAGMENT_COUNT = 1
+    }
+
     private lateinit var binding: MainActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,5 +42,14 @@ class MainActivity : AppCompatActivity() {
             }
             return@setOnItemSelectedListener true
         }
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount <= MINIMAL_FRAGMENT_COUNT) {
+            finish()
+        } else {
+            supportFragmentManager.popBackStack()
+        }
+
     }
 }
